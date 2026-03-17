@@ -18,13 +18,15 @@ export async function GET(request: Request) {
         if (!username || !slug) return new Response('Missing params', { status: 400 });
 
         // Fetch channel with rating info
-        const { data: channel } = await supabase
+        const { data: channel, error: channelError } = await supabase
             .from('channels')
             .select('id, name, average_rating, reviews_count')
             .eq('username', username)
-            .single();
+            .maybeSingle();
 
-        if (!channel) return new Response('Channel not found', { status: 404 });
+        if (channelError || !channel) {
+            return new Response(`Channel not found: ${username}`, { status: 404 });
+        }
 
         // Fetch review
         const { data: reviews } = await supabase
@@ -41,6 +43,10 @@ export async function GET(request: Request) {
         });
 
         if (!review) return new Response('Review not found', { status: 404 });
+
+        const contentPreview = (review.content || '').length > 220
+            ? (review.content || '').substring(0, 220) + '...'
+            : (review.content || '');
 
         const ratingColor = "#00B67A"; // Trustpilot style green
 
@@ -68,7 +74,7 @@ export async function GET(request: Request) {
                             marginBottom: '32px',
                             letterSpacing: '-0.01em'
                         }}>
-                            "{review.title} - {review.content.length > 220 ? review.content.substring(0, 220) + '...' : review.content}"
+                            "{review.title} - {contentPreview}"
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>

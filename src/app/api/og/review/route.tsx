@@ -2,13 +2,19 @@ import { ImageResponse } from 'next/og';
 import { createClient } from '@supabase/supabase-js';
 
 export const runtime = 'nodejs';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
     try {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+        const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+        if (!supabaseUrl || !supabaseAnonKey) {
+            return new Response('Supabase credentials missing', { status: 500 });
+        }
+
+        const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
         const { searchParams } = new URL(request.url);
         const username = searchParams.get('username');
         const slug = searchParams.get('slug');

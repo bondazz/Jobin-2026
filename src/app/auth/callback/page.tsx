@@ -83,7 +83,9 @@ export default function AuthCallback() {
 
                 // 5. Navigate to profile (hard redirect for full state refresh)
                 if (activeUsername) {
-                    window.location.href = `/profile/${activeUsername}`;
+                    setTimeout(() => {
+                        window.location.href = `/profile/${activeUsername}`;
+                    }, 500);
                 } else {
                     window.location.href = '/dashboard/candidate';
                 }

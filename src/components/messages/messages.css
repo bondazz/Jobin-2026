@@ -1,0 +1,354 @@
+/* Messages View V5 Styles (3-column layout) */
+.msg-chat-header-v5 {
+    padding: 20px 24px;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+}
+
+.chat-party {
+    display: flex;
+    align-items: center;
+}
+
+.chat-p-name-v5 {
+    font-size: 17px;
+    font-weight: 800;
+    color: #1e293b;
+    text-decoration: none;
+    display: block;
+    line-height: 1.2;
+}
+
+.chat-p-name-v5:hover {
+    color: #00a264;
+}
+
+.chat-p-status-v5 {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.online-dot {
+    width: 8px;
+    height: 8px;
+    background: #0caa41;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.msg-thread-v5 {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f8fafc;
+}
+
+.msg-bubble-wrap {
+    display: flex;
+    width: 100%;
+    gap: 12px;
+}
+
+.msg-bubble-wrap.me {
+    justify-content: flex-end;
+}
+
+.msg-bubble-wrap.them {
+    justify-content: flex-start;
+}
+
+.msg-them-avatar {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    margin-top: auto;
+}
+
+.msg-bubble-v5 {
+    max-width: 70%;
+    padding: 14px 18px;
+    border-radius: 20px;
+    position: relative;
+    font-size: 15px;
+    line-height: 1.5;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.me .msg-bubble-v5 {
+    background: #00a264;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.them .msg-bubble-v5 {
+    background: #fff;
+    color: #334155;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #f1f5f9;
+}
+
+.bubble-time-v5 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    font-size: 11px;
+    margin-top: 6px;
+    opacity: 0.8;
+}
+
+.msg-input-v5 {
+    padding: 16px 24px;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.msg-input-v5 input {
+    flex: 1;
+    padding: 14px 20px;
+    border-radius: 24px;
+    border: 1.5px solid #e2e8f0;
+    outline: none;
+    transition: all 0.2s;
+    font-size: 15px;
+    background: #f8fafc;
+}
+
+.msg-input-v5 input:focus {
+    border-color: #00a264;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 162, 100, 0.1);
+}
+
+.msg-input-v5 button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: #00a264;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.msg-input-v5 button:hover:not(:disabled) {
+    transform: scale(1.05);
+    background: #008a55;
+}
+
+.msg-input-v5 button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chat-empty-state-v5 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    background: #f8fafc;
+    text-align: center;
+    padding: 40px;
+}
+
+.chat-empty-state-v5 h2 {
+    color: #1e293b;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.chat-empty-state-v5 p {
+    color: #64748b;
+    font-size: 15px;
+    max-width: 300px;
+}
+
+/* Right Side - Conversations List */
+.convo-list-v5 {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.convo-item-v5 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 4px;
+}
+
+.convo-item-v5:hover {
+    background: #f8fafc;
+}
+
+.convo-item-v5.active {
+    background: #f0fdf4;
+}
+
+.convo-item-v5.active .convo-name-v5 {
+    color: #00a264;
+}
+
+.convo-avatar-v5 {
+    width: 48px;
+    height: 48px;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.convo-meta-v5 {
+    flex: 1;
+    min-width: 0;
+}
+
+.convo-top-v5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.convo-name-v5 {
+    font-weight: 700;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.convo-time-v5 {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.convo-last-msg-v5 {
+    font-size: 13px;
+    color: #64748b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.empty-convos-v5 {
+    padding: 40px 20px;
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+}
+/* Mobile Adjustments */
+.msg-mobile-back-v5 {
+    display: none;
+    background: none;
+    border: none;
+    color: #64748b;
+    padding: 0;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+    .msg-mobile-container .comm-container {
+        display: flex !important;
+        flex-direction: column;
+        padding: 10px !important;
+        height: auto !important; /* Allow natural page scroll on mobile */
+        min-height: calc(100vh - 80px);
+        gap: 12px !important;
+    }
+
+    .msg-mobile-container .comm-left-rail {
+        display: none !important;
+    }
+
+    /* Logic: Show list or chat based on mobileView state class */
+    .msg-mobile-container.show-list .msg-chat-main-v5 {
+        display: none !important;
+    }
+
+    .msg-mobile-container.show-chat .msg-list-rail-v5 {
+        display: none !important;
+    }
+
+    .msg-mobile-container.show-list .msg-list-rail-v5 {
+        width: 100% !important;
+        max-width: 100% !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 16px !important;
+        height: calc(100vh - 120px) !important;
+    }
+
+    .msg-mobile-container.show-chat .msg-chat-main-v5 {
+        width: 100% !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 16px !important;
+        height: calc(100vh - 120px) !important;
+        min-height: 500px !important;
+    }
+
+    .msg-mobile-back-v5 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .msg-thread-v5 {
+        padding: 16px;
+    }
+
+    .msg-bubble-v5 {
+        max-width: 85%;
+    }
+
+    .msg-input-v5 {
+        padding: 12px 16px;
+    }
+
+    .msg-target-card-v5 {
+        display: none !important; /* Hide target card info on mobile list view to save space */
+    }
+}

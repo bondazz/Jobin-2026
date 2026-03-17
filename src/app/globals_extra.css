@@ -1,0 +1,58 @@
+/* --- Verification Tooltip --- */
+.v-tooltip-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.v-tooltip-box {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 280px;
+    background: #1e293b;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.v-tooltip-box::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1e293b transparent transparent transparent;
+}
+
+.v-tooltip-container:hover .v-tooltip-box,
+.v-tooltip-container:active .v-tooltip-box {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.v-tooltip-title {
+    display: block;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #fff;
+}
+
+.v-tooltip-text {
+    color: #cbd5e1;
+    font-weight: 400;
+}

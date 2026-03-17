@@ -21,14 +21,16 @@ import { VerifiedBadge } from '@/components/common/VerifiedBadge';
 import LeftSidebar from '@/components/layout/LeftSidebar';
 
 
+import { Suspense } from 'react';
+
+
 // --- SUB COMPONENTS ---
 
 
 // --- TYPES ---
 
 
-
-export default function CommunityPage() {
+function CommunityContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const searchTerm = searchParams.get('search');
@@ -1130,5 +1132,13 @@ export default function CommunityPage() {
                 ))}
             </div>
         </>
+    );
+}
+
+export default function CommunityPage() {
+    return (
+        <Suspense fallback={null}>
+            <CommunityContent />
+        </Suspense>
     );
 }

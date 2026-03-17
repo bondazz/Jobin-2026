@@ -9,7 +9,7 @@ interface Props {
 async function getReviewData(username: string, slug: string) {
     const { data: channel } = await supabase
         .from('channels')
-        .select('id, name, username, average_rating, reviews_count')
+        .select('id, name, username, average_rating, reviews_count, avatar_url')
         .eq('username', username)
         .single();
 
@@ -101,7 +101,7 @@ export default async function Page({ params }: Props) {
         "itemReviewed": {
             "@type": "Organization",
             "name": channel.name,
-            "image": channel.avatar_url,
+            "image": (channel as any).avatar_url,
             "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": channel.average_rating || 0,

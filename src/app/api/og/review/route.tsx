@@ -108,10 +108,11 @@ export async function GET(request: Request) {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div style={{ width: '36px', height: '36px', backgroundColor: trustGreen, borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '10px' }}>
-                                <span style={{ color: 'white', fontWeight: 'bold', fontSize: '24px' }}>J</span>
-                            </div>
-                            <span style={{ fontSize: '32px', fontWeight: 'bold', color: '#111827' }}>Jobin.az</span>
+                            <img
+                                src="https://jobin.az/jobin-logo.png"
+                                style={{ height: '45px', width: 'auto' }}
+                                alt="Jobin Logo"
+                            />
                         </div>
                     </div>
                 </div>

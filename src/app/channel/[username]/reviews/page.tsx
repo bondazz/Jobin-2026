@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
 import ReviewsPageClient from './ReviewsPageClient';
 
+export const dynamic = 'force-dynamic';
+
 const getRatingLabel = (rating: number) => {
     if (rating >= 4.5) return 'Excellent';
     if (rating >= 3.5) return 'Great';

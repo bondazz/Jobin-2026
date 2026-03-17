@@ -53,6 +53,18 @@ export async function GET(request: Request) {
         const displayContent = content.length > 250 ? content.substring(0, 250) + '...' : content;
         const authorName = review.profiles?.full_name || review.profiles?.username || 'User';
 
+        // Fetch logo as base64 for stability
+        let logoBase64 = '';
+        try {
+            const logoRes = await fetch('https://jobin.az/jobin-logo.png');
+            if (logoRes.ok) {
+                const buffer = await logoRes.arrayBuffer();
+                logoBase64 = `data:image/png;base64,${Buffer.from(buffer).toString('base64')}`;
+            }
+        } catch (e) {
+            console.error('Logo fetch failed', e);
+        }
+
         return new ImageResponse(
             (
                 <div style={{
@@ -108,11 +120,15 @@ export async function GET(request: Request) {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img
-                                src="https://jobin.az/jobin-logo.png"
-                                style={{ height: '45px', width: 'auto' }}
-                                alt="Jobin Logo"
-                            />
+                            {logoBase64 ? (
+                                <img
+                                    src={logoBase64}
+                                    style={{ height: '45px', width: 'auto' }}
+                                    alt="Jobin Logo"
+                                />
+                            ) : (
+                                <span style={{ fontSize: '32px', fontWeight: 'bold', color: '#111827' }}>Jobin</span>
+                            )}
                         </div>
                     </div>
                 </div>

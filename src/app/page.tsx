@@ -17,7 +17,7 @@ export default function Home() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: `https://jobin.az/auth/callback`,
       },
     });
     if (error) console.error('Error logging in with Google:', error.message);

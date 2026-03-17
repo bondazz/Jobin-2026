@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
 import ReviewClient from './ReviewClient';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
     params: Promise<{ username: string; slug: string }>;
 }

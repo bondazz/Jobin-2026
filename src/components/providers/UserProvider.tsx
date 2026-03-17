@@ -40,76 +40,79 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const [unreadCount, setUnreadCount] = useState(0);
 
     const fetchUserData = async () => {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session?.user) {
-            setLoading(false);
-            return;
-        }
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session?.user) {
+                return;
+            }
 
-        const userId = session.user.id;
+            const userId = session.user.id;
 
-        // Fetch Profile
-        const { data: profile } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', userId)
-            .maybeSingle();
+            // Fetch Profile
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', userId)
+                .maybeSingle();
 
-        // Fetch Channels
-        const { data: channels } = await supabase
-            .from('channels')
-            .select('*')
-            .eq('owner_id', userId);
+            // Fetch Channels
+            const { data: channels } = await supabase
+                .from('channels')
+                .select('*')
+                .eq('owner_id', userId);
 
-        const newIdentities: Record<string, Identity> = {};
-        if (profile) {
-            newIdentities['candidate'] = {
-                id: profile.id,
-                type: 'profile',
-                name: profile.full_name || 'Guest',
-                username: profile.username || 'user',
-                avatar: profile.avatar_url,
-                isChannel: false,
-                is_verified: profile.is_verified,
-                ...profile
-            };
-        }
+            const newIdentities: Record<string, Identity> = {};
+            if (profile) {
+                newIdentities['candidate'] = {
+                    id: profile.id,
+                    type: 'profile',
+                    name: profile.full_name || 'Guest',
+                    username: profile.username || 'user',
+                    avatar: profile.avatar_url,
+                    isChannel: false,
+                    is_verified: profile.is_verified,
+                    ...profile
+                };
+            }
 
-        channels?.forEach(ch => {
-            newIdentities[ch.id] = {
-                id: ch.id,
-                type: 'channel',
-                name: ch.name,
-                username: ch.username,
-                avatar: ch.avatar_url,
-                isChannel: true,
-                is_verified: ch.is_verified,
-                ...ch
-            };
-        });
+            channels?.forEach(ch => {
+                newIdentities[ch.id] = {
+                    id: ch.id,
+                    type: 'channel',
+                    name: ch.name,
+                    username: ch.username,
+                    avatar: ch.avatar_url,
+                    isChannel: true,
+                    is_verified: ch.is_verified,
+                    ...ch
+                };
+            });
 
-        setCurrentUserProfile(profile);
-        setIdentities(newIdentities);
+            setCurrentUserProfile(profile);
+            setIdentities(newIdentities);
 
-        // Resolve Active Identity
-        const saved = localStorage.getItem('jobin_active_identity');
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                const key = parsed.type === 'profile' ? 'candidate' : parsed.id;
-                if (newIdentities[key]) {
-                    setActiveIdentity(newIdentities[key]);
-                } else {
+            // Resolve Active Identity
+            const saved = localStorage.getItem('jobin_active_identity');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    const key = parsed.type === 'profile' ? 'candidate' : parsed.id;
+                    if (newIdentities[key]) {
+                        setActiveIdentity(newIdentities[key]);
+                    } else {
+                        setActiveIdentity(newIdentities['candidate'] || null);
+                    }
+                } catch (e) {
                     setActiveIdentity(newIdentities['candidate'] || null);
                 }
-            } catch (e) {
+            } else {
                 setActiveIdentity(newIdentities['candidate'] || null);
             }
-        } else {
-            setActiveIdentity(newIdentities['candidate'] || null);
+        } catch (error) {
+            console.error('Error in fetchUserData:', error);
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
     useEffect(() => {
